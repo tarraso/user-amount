@@ -20,7 +20,7 @@ let UserBalanceController = {
                 }
                 res.json({ success: true });
         } catch (error) {
-            if (error.name === 'SequelizeUniqueConstraintError') {
+            if (error.name === 'SequelizeDatabaseError') {
                 res.send({success: false, message: "Insufficient balance"})
             } else {
                 console.error(error);
