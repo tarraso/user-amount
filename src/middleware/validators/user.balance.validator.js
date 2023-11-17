@@ -1,21 +1,20 @@
 const { check } = require('express-validator');
 const ApiError = require('../../utils/api_error');
 
-// Custom validator function for a non-negative number
-const nonNegativeNumberValidator = async value => {
+const isNumber = async value => {
     const floatValue = parseFloat(value);
-    if (!isNaN(floatValue) && floatValue >= 0) {
+    if (!isNaN(floatValue)) {
       return floatValue; // Validation passes
     } else {
-      throw new Error("Amount must be a non-negative number");
+      throw new Error("Amount must be a number");
     }
 };
   
 // Validator middleware for 'amount'
 const validateAmount = check('amount')
 .exists()
-.custom(nonNegativeNumberValidator)
-.withMessage('Amount must be a non-negative number');
+.custom(isNumber)
+.withMessage('Amount must be a number');
 
 module.exports = {
     validateAmount,

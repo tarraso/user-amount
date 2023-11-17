@@ -5,7 +5,7 @@ const ApiError = require('../utils/api_error');
 const reduceUserBalance = async function(userId, amount){
     try {
         let result = await models.User.update(
-            { balance: Sequelize.literal(`balance - ${amount}`) },
+            { balance: Sequelize.literal(`balance + ${amount}`) },
             { where: { id: userId } }
         )
         if (result[0] === 1) {
